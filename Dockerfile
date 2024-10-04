@@ -84,5 +84,5 @@ ARG WORKSPACE=docker_navigation
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 RUN echo 'source /usr/share/gazebo/setup.bash' >> ~/.bashrc
 RUN echo "if [ -f ~/${WORKSPACE}/install/setup.bash ]; then source ~/${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
-
+RUN echo "export GZ_SIM_SYSTEM_PLUGIN_PATH=/opt/ros/humble/lib/" >> ~/.bashrc
 ENTRYPOINT ["/ros_entrypoint.sh"]
