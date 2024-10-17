@@ -10,3 +10,9 @@
 [submodule "src/mulinex_ignition"]
 	path = src/mulinex_ignition
 	url = https://github.com/Cionix90/mulinex_ignition.git
+[submodule "src/Pi3Hat_Controllers"]
+	path = src/Pi3Hat_Controllers
+	url = https://github.com/CentroEPiaggio/Pi3Hat_Controllers.git
+[submodule "src/Omni_Mulinex_Joystic_OPC"]
+	path = src/Omni_Mulinex_Joystic_OPC
+	url = https://github.com/CentroEPiaggio/Omni_Mulinex_Joystic_OPC.git
