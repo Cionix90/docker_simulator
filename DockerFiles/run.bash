@@ -15,8 +15,8 @@ then
     touch $XAUTH
     xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 fi
-
-xhost +
+echo $XAUTH
+# xhost +
 
 docker run \
     --net=host \
