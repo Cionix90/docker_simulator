@@ -4,8 +4,9 @@ services:
       dockerfile: Dockerfile_1
       context: .
     container_name: ros2_jammy_it
-    networks:
-      - ros2_internal
+    # networks:
+    #   - ros2_internal
+    network_mode: "host"
     # Interactive shell settings
     stdin_open: true
     tty: true
@@ -25,7 +26,7 @@ services:
     privileged: true  # Fixed spelling and removed duplicate
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      # - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       - ~/.bash_history:/home/ros/.bash_history
       - /home/punk-opc/Documents/docker_navigation:/home/ros/docker_simulation_ws
       - /dev/input:/dev/input
