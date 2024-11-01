@@ -46,9 +46,11 @@ RUN curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyri
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 RUN echo " CURL DONE"
 
-RUN sudo  apt-get update 
-RUN sudo apt-get install -y gz-harmonic
+RUN   apt-get update 
+RUN  apt-get install -y gz-harmonic
 RUN echo "Ignition Installed"
+RUN apt-get update
+RUN apt-get upgrade -y
 
 # install 
 # Adapt your desired python version here    
@@ -94,7 +96,7 @@ RUN pipx install numpy
 # Set up auto-source of workspace for ros user
 ARG WORKSPACE=docker_navigation
 WORKDIR /home/ros/${WORKSPACE}
-
+RUN sudo usermod -a -G render,avahi,video ${USERNAME}
 RUN echo "source /opt/ros/${DISTRO}/setup.bash" >> ~/.bashrc
 
 RUN echo "if [ -f ~/${WORKSPACE}/install/setup.bash ]; then source ~/${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
