@@ -1,12 +1,6 @@
-[submodule "src/mulinex_gazebo"]
-	path = src/mulinex_gazebo
-	url = https://github.com/CentroEPiaggio/mulinex_gazebo.git
 [submodule "src/mulinex_description"]
 	path = src/mulinex_description
 	url = https://github.com/CentroEPiaggio/mulinex_description.git
-[submodule "src/gazebo_models_worlds_collection"]
-	path = src/gazebo_models_worlds_collection
-	url = https://github.com/leonhartyao/gazebo_models_worlds_collection.git
 [submodule "src/mulinex_ignition"]
 	path = src/mulinex_ignition
 	url = https://github.com/Cionix90/mulinex_ignition.git
