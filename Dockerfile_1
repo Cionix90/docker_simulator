@@ -102,6 +102,8 @@ RUN echo "source /opt/ros/${DISTRO}/setup.bash" >> ~/.bashrc
 RUN echo "if [ -f ~/${WORKSPACE}/install/setup.bash ]; then source ~/${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 RUN echo "export GZ_SIM_SYSTEM_PLUGIN_PATH=/opt/ros/humble/lib/" >> ~/.bashrc
 RUN sudo ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
+
+RUN sudo prime-select nvidia
 # install gazebo ignition
 
 

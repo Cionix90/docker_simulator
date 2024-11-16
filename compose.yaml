@@ -26,19 +26,15 @@ services:
       - GZ_VERSION=harmonic
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all,graphics,display,video,utility,compute
-      - GZ_VERSION=harmonic
-      - IGN_VERSION=harmonic
-      - IGNITION_VERSION=harmonic
-      # Add these OpenGL related variables
-      - __GL_SYNC_TO_VBLANK=0
-      - __GL_SYNC_DISPLAY_DEVICE=${DISPLAY}
-      - MESA_GL_VERSION_OVERRIDE=3.3
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      
     privileged: true  # Fixed spelling and removed duplicate
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       # - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       - ~/.bash_history:/home/ros/.bash_history
-      - /home/punk-opc/Documents/docker_navigation:/home/ros/docker_simulation_ws
+      - ./:/home/ros/docker_simulation_ws
       - /dev/input:/dev/input
       - /dev/dri:/dev/dri
       - /dev/nvidia0:/dev/nvidia0
@@ -55,11 +51,11 @@ services:
         echo 'ROS2 Jazzy environment loaded' &&
         bash
       "
-    devices:
-      - /dev/dri:/dev/dri
-      - /dev/nvidia0:/dev/nvidia0
-      - /dev/nvidiactl:/dev/nvidiactl
-      - /dev/nvidia-modeset:/dev/nvidia-modeset
+    # devices:
+    #   - /dev/dri:/dev/dri
+    #   - /dev/nvidia0:/dev/nvidia0
+    #   - /dev/nvidiactl:/dev/nvidiactl
+    #   - /dev/nvidia-modeset:/dev/nvidia-modeset
     runtime: nvidia
     deploy:
       resources:
