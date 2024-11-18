@@ -1,12 +1,20 @@
 services:
-  ros2_shell:
+  ros2_jammy_sim:
     build:
-      dockerfile: Dockerfile_1
-      context: .
-    container_name: ros2_jammy_it
-    # networks:
-    #   - ros2_internal
-    network_mode: "host"
+      context: ./docker_simulator/DockerFiles
+      dockerfile: Dockerfile
+      args:
+        - BASE_IMAGE=osrf/ros
+        - BASE_TAG=jazzy-desktop-full
+        - DISTRO=jazzy
+        - IMAGE_NAME=docker_control_simulation
+        - IMAGE_TAG=0.1
+        - WORKSPACE=docker_simulation_ws
+
+    container_name: ros2_jammy_simulator
+    networks:
+      - ros2_internal
+    # network_mode: "host"
     # Interactive shell settings
     stdin_open: true
     tty: true
@@ -34,7 +42,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       # - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       - ~/.bash_history:/home/ros/.bash_history
-      - ./:/home/ros/docker_simulation_ws
+      - ./docker_simulator:/home/ros/docker_simulation_ws
       - /dev/input:/dev/input
       - /dev/dri:/dev/dri
       - /dev/nvidia0:/dev/nvidia0
@@ -64,46 +72,7 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-  # ros2_joy:
-  #   build:
-  #     dockerfile: Dockerfile_1
-  #     context: .
-  #   container_name: ros2_jammy_joy
-  #   networks:
-  #     - ros2_internal
-  #   # Interactive shell settings
-  #   stdin_open: true
-  #   tty: true
-  #   # Network settings
 
-  #   # Environment variables
-  #   environment:
-  #     - DISPLAY=${DISPLAY}
-  #     - QT_X11_NO_MITSHM=1
-  #     - XAUTHORITY=/tmp/.docker.xauth
-  #     - ROS_DOMAIN_ID=0
-  #     - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-  #     # Shell history
-  #     - HISTFILE=/home/ros/.bash_history
-  #     - HISTFILESIZE=10000
-  #     - RCUTILS_COLORIZED_OUTPUT=1
-  #   privileged: true  # Fixed spelling and removed duplicate
-  #   volumes:
-  #     - /tmp/.X11-unix:/tmp/.X11-unix:rw
-  #     - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
-  #     - ~/.bash_history:/home/ros/.bash_history
-  #     - /home/punk-opc/Documents/docker_navigation:/home/ros/docker_simulation_ws
-  #     - /dev/input:/dev/input
-
-  #   # Command to source ROS2 environment and start shell
-  #   command: >
-  #     bash -c "
-  #       source /opt/ros/jazzy/setup.bash &&
-  #       echo 'ROS2 Jazzy environment loaded' &&
-  #       bash
-  #     "
-  #   devices:
-  #     - /dev/dri:/dev/dri
 networks:
   ros2_internal:
     driver: bridge
