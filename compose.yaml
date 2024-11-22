@@ -1,7 +1,7 @@
 services:
-  ros2_jammy_sim:
+  ros2_humble_sim:
     build:
-      context: ./docker_simulator/DockerFiles
+      context: ./DockerFiles
       dockerfile: Dockerfile
       args:
         - BASE_IMAGE=osrf/ros
@@ -11,7 +11,7 @@ services:
         - IMAGE_TAG=0.1
         - WORKSPACE=docker_simulation_ws
 
-    container_name: ros2_jammy_simulator
+    container_name: ros2_humble_simulator
     networks:
       - ros2_internal
     # network_mode: "host"
@@ -25,13 +25,13 @@ services:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=28
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
       # Shell history
       - HISTFILE=/home/ros/.bash_history
       - HISTFILESIZE=10000
       - RCUTILS_COLORIZED_OUTPUT=1
-      - GZ_VERSION=harmonic
+      - IGN_VERSION=fortress
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all,graphics,display,video,utility,compute
       - __NV_PRIME_RENDER_OFFLOAD=1
@@ -42,7 +42,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       # - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       - ~/.bash_history:/home/ros/.bash_history
-      - ./docker_simulator:/home/ros/docker_simulation_ws
+      - ./:/home/ros/docker_simulation_ws
       - /dev/input:/dev/input
       - /dev/dri:/dev/dri
       - /dev/nvidia0:/dev/nvidia0
@@ -55,7 +55,7 @@ services:
     # Command to source ROS2 environment and start shell
     command: >
       bash -c "
-        source /opt/ros/jazzy/setup.bash &&
+        source /opt/ros/humble/setup.bash &&
         echo 'ROS2 Jazzy environment loaded' &&
         bash
       "
