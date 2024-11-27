@@ -71,7 +71,7 @@ RUN if id -u ${USER_UID} ; then userdel `id -un ${USER_UID}` ; fi
 RUN groupadd --gid ${USER_GID} ${USERNAME} 
 RUN useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} \
     && apt-get update \
-    && apt-get install -y sudo \
+    && apt-get install -y sudo git \
     && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
     && chmod 0440 /etc/sudoers.d/${USERNAME}
 
@@ -103,6 +103,17 @@ RUN echo "if [ -f ~/${WORKSPACE}/install/setup.bash ]; then source ~/${WORKSPACE
 RUN echo "export GZ_SIM_SYSTEM_PLUGIN_PATH=/opt/ros/humble/lib/" >> ~/.bashrc
 RUN sudo ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 
+RUN cd /home/ros/ \
+    && git clone -b fortress https://github.com/RobotecAI/RGLGazeboPlugin.git 
+RUN cd /home/ros/RGLGazeboPlugin \
+    && mkdir build \ 
+    && cd build \ 
+    && cmake .. \
+    && make -j \
+    && make install \
+    && cd .. 
+    # && export IGN_GAZEBO_SYSTEM_PLUGIN_PATH=/home/ros/RGLGazeboPlugin/install/RGLServerPlugin:$IGN_GAZEBO_SYSTEM_PLUGIN_PATH \ 
+    # && export IGN_GUI_PLUGIN_PATH=/home/ros/RGLGazeboPlugin/install/RGLVisualize:$IGN_GUI_PLUGIN_PATH
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 # RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
