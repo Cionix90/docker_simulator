@@ -10,3 +10,6 @@
 [submodule "src/Omni_Mulinex_Joystic_OPC"]
 	path = src/Omni_Mulinex_Joystic_OPC
 	url = https://github.com/CentroEPiaggio/Omni_Mulinex_Joystic_OPC.git
+[submodule "src/ugv_gazebo_sim"]
+	path = src/ugv_gazebo_sim
+	url = https://github.com/Cionix90/ugv_gazebo_sim.git

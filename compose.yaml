@@ -32,6 +32,7 @@ services:
       - HISTFILESIZE=10000
       - RCUTILS_COLORIZED_OUTPUT=1
       - IGN_VERSION=fortress
+      - IGN_GAZEBO_RESOURCE_PATH=/opt/ros/humble/share/
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all,graphics,display,video,utility,compute
       - __NV_PRIME_RENDER_OFFLOAD=1
