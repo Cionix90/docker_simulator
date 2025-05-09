@@ -6,7 +6,7 @@ The Repository purpose is to provide an easy set up to allow robotic software de
 
 Docker Engine: follow the docker engine installation [here](https://docs.docker.com/engine/install/ubuntu/) and then enable the docker usage as non-root user as specified [here](https://docs.docker.com/engine/install/linux-postinstall/)
 
-Install Nvidia Driver: TODO
+Install Nvidia Driver: follow the [Nvidia Display Driver installation procedure](https://github.com/oddmario/NVIDIA-Ubuntu-Driver-Guide)
 
 Nvidia-Container-Toolkit: follow the nvidia-container-toolkit following [this](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
